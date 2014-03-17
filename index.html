@@ -1,1 +1,142 @@
-test
+<html>
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="-1" />
+        <meta http-equiv="Cache-Control" content="no-cache" />
+        
+		<title>sprite</title>	
+		
+		<script type="text/javascript" src="js/Base.js"></script>
+		<script type="text/javascript" src="js/Animation.js"></script>
+		<script type="text/javascript" src="js/Sprite.js"></script>
+		<script type="text/javascript" src="js/Player.js"></script>
+		<script type="text/javascript" src="js/Game.js"></script>
+	    <script type="text/javascript" src="js/Enemy.js"></script>
+			
+        <style type="text/css">
+    	body{
+    		border:none 0px;
+    		margin:0px;
+    		padding:10px;
+    		font-size:16px;
+    		background-color:#f3f3f3;
+    	}   	
+    	canvas{
+    		border:1px solid blue;    		
+    	}
+			.window{
+			}
+			.window .canvas {
+				margin: 0px;
+			    width : 600;
+	            height : 400;
+			}
+			.mask{
+				background: url("img/start.png"); 
+				width: 600px; 
+				height: 400px; 
+				position: absolute; 
+				top: 10px;
+				z-index: 9999;
+				border:1px solid blue;   
+			}	
+			.start{
+				background: url("img/Start_btn.png"); 
+				width: 150px;
+				height: 60px; 
+				border:0;
+				padding:0;
+				margin-top: 90px;
+				margin-left: 350px;
+				cursor:pointer;
+			}
+
+        </style>
+	    <script type="text/javascript">
+	
+	
+	
+	
+    function init(){	
+	
+	//加载图片,并存入全局变量 ImgCache, 
+	// 加载完成后,调用startDemo
+	ImgCache=loadImage( [ 
+			{ 	id : "player",
+				url : "img/player.png"
+			},
+			{
+				id : "playerjump",
+				url : "img/playerjump.png"
+			},
+			{ 	id : "enemy",
+				url : "img/enemy.png"
+			},
+			{ 	id : "bg",
+				url : "img/bg.png"
+			}
+		], 
+		
+		startDemo );
+
+
+
+    }
+
+    var canvas=null;
+    var context=null;
+    var gamestart=false;
+    
+    var Key={
+    	A:65,
+    	W:87,
+    	D:68
+    }
+
+	function start(event){
+		init();
+	    document.getElementById("startBtn").style.display = "none";
+	}
+			    
+
+    
+    var game=new Game({
+	FPS : 60,
+	width : 600,
+	height : 400,
+	sprites : [ ]
+
+    });
+    
+
+    function startDemo(){
+	
+	
+	game.sprites.push(createPlayer());
+    game.sprites.push(createEnemy());
+    game.sprites.push(createEnemy());
+
+	
+	game.init();
+	game.start();	
+
+   }
+   
+
+
+        
+	</script>
+	
+    </head>
+	<body >
+		
+	<div id="statebar" style="font-size:45px; position:absolute; top:10px; left:250px;" >
+    Time : <span id="timeCount"></span>       
+    </div>
+	<div class="mask" id="startBtn">
+	    <input type="button" class="start" onclick="start(event)"/>
+    </div>
+
+	</body>
+</html>
